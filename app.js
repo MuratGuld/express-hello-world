@@ -1,13 +1,15 @@
 const express = require("express");
 const app = express();
+var cors = require("cors");
 const port = process.env.PORT || 3001;
 
-app.get("/", (req, res) => res.type('html').send(html));
+app.use(cors());
 
-app.use(express.static('data'));
+app.get("/", (req, res) => res.type("html").send(html));
+
+app.use(express.static("data"));
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
-
 
 const html = `
 <!DOCTYPE html>
@@ -58,4 +60,4 @@ const html = `
     </section>
   </body>
 </html>
-`
+`;
