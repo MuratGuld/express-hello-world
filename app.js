@@ -1,11 +1,26 @@
 const express = require("express");
 const app = express();
 var cors = require("cors");
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3002;
+const products = require("./data/data.json");
 
 app.use(cors());
 
 app.get("/", (req, res) => res.type("html").send(html));
+
+app.get("/products", function (req, res) {
+  let requestedTitle = req.query.title.toLowerCase();
+  let requestedCategory = req.query.category.toLowerCase();
+  const filteredProduct = products.filter(
+    (product) =>
+      product.title.toLowerCase().includes(requestedTitle) &&
+      product.category == requestedCategory
+  );
+  response = {
+    filteredProduct,
+  };
+  res.end(JSON.stringify(response));
+});
 
 app.use(express.static("data"));
 
