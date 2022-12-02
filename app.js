@@ -9,12 +9,12 @@ app.use(cors());
 app.get("/", (req, res) => res.type("html").send(html));
 
 app.get("/products", function (req, res) {
-  let requestedTitle = req.query.title.toLowerCase();
-  let requestedCategory = req.query.category.toLowerCase();
+  let requestedTitle = req.query.title;
+  let requestedCategory = req.query.category;
   const filteredProduct = products.filter(
     (product) =>
-      product.title.toLowerCase().includes(requestedTitle) &&
-      product.category == requestedCategory
+      (requestedTitle == undefined || product.title.toLowerCase().includes(requestedTitle.toLowerCase())) &&
+      (requestedCategory == undefined || product.category == requestedCategory)
   );
   response = {
     filteredProduct,
