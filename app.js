@@ -13,7 +13,8 @@ app.get("/products", function (req, res) {
   let requestedCategory = req.query.category;
   const filteredProduct = products.filter(
     (product) =>
-      (requestedTitle == undefined || product.title.toLowerCase().includes(requestedTitle.toLowerCase())) &&
+      (requestedTitle == undefined ||
+        product.title.toLowerCase().includes(requestedTitle)) &&
       (requestedCategory == undefined || product.category == requestedCategory)
   );
   response = {
